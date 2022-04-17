@@ -1,3 +1,4 @@
+// button
 @mixin button-size($padding-x, $padding-y, $font-size, $border-radius) {
   padding: $padding-y $padding-x;
   font-size: $font-size;
@@ -31,5 +32,18 @@
     color: $color;
     background: $background;
     border-color: $border;
+  }
+}
+
+// alert
+@mixin alert-style(
+  $title-color,
+) {
+  background-color: lighten($title-color, 25%);
+  .alert-title {
+    color: $title-color;
+  }
+  .alert-description {
+    color: lighten($title-color, 10%)
   }
 }

@@ -1,0 +1,45 @@
+.alert {
+  position: relative;
+  width: 100%;
+  padding: 8px 16px;
+  // background-color: lighten($primary, 25%);
+  border-radius: 4px;
+  .alert-title {
+    // color: $primary;
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+  }
+  .alert-description {
+    margin-top: 8px;
+    // color: lighten($primary, 10%);
+    // color: ($primary);
+    font-size: $font-size-base;
+    font-weight: $font-weight-normal;
+  }
+  .alert-closeText {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: $white;
+    font-style: normal;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-normal;
+  }
+}
+
+.alert-default {
+  @include alert-style($primary)
+}
+
+.alert-success {
+  @include alert-style($success)
+}
+
+.alert-danger {
+  @include alert-style($danger)
+}
+
+.alert-warning {
+  @include alert-style($warning)
+}

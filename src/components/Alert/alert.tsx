@@ -1,76 +1,60 @@
 import React from 'react'
 import classNames from 'classnames'
 
-export enum ButtonSize {
-  Large = 'lg',
-  Small = 'sm'
-}
-
-export enum ButtonType {
-  Primary = 'primary',
+export enum AlertType {
+  Success = 'success',
   Default = 'default',
   Danger = 'danger',
-  Link = 'link'
+  Warning = 'warning'
 }
 
-interface BaseButtonProps {
+interface BaseAlertProps {
   className?: string;
-  disabled?: boolean;
-  size?: ButtonSize;
-  btnType?: ButtonType;
+  alertType?: AlertType;
+  title?: string;
+  description?: string;
+  closable?: boolean;
+  closeText?: string;
+  onClick?: Function;
   children?: React.ReactNode
-  href?: string
 }
 
-type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>
-
-type AnchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>
-
-export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>
-
-const Alert: React.FC<ButtonProps> = (props) => {
+const Alert: React.FC<BaseAlertProps> = (props) => {
   const {
-    btnType,
-    size,
-    disabled,
+    alertType,
+    title,
+    description,
+    closable,
+    closeText,
     className,
     children,
-    href,
+    onClick,
     ...restProps
   } = props
-  // btn, btn-lg, btn-primary
-  const classes = classNames('btn', className, {
-    [`btn-${btnType}`]: btnType,
-    [`btn-${size}`]: size,
-    'disabled': (btnType === ButtonType.Link) && disabled
+
+  const classes = classNames('alert', className, {
+    [`alert-${alertType}`]: alertType,
   })
 
-  if (btnType === ButtonType.Link) {
-    return (
-      <a
-        className={classes}
-        href={href}
-        {...restProps}
-      >
-        {children}
-      </a>
-    )
-  } else {
-    return (
-      <button
-        className={classes}
-        disabled={disabled}
-        {...restProps}
-      >
-        {children}
-      </button>
-    )
-  }
+  return (
+    <div
+      className={classes}
+      {...restProps}
+    >
+      <span className={`alert-title`}>{ title }</span>
+      {description && <p className={`alert-description`}>{ description }</p>}
+      {closable && <i className={`alert-closeText`} onClick={() => {
+        console.log(123);
+        
+      }}>{ closeText }</i>}
+    </div>
+  )
 }
 
 Alert.defaultProps = {
-  disabled: false,
-  btnType: ButtonType.Default
+  closable: true,
+  closeText: '关闭',
+  alertType: AlertType.Default
 }
 
 export default Alert
