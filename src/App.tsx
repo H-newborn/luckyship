@@ -25,8 +25,8 @@ function App() {
         </div>
         <Alert alertType={AlertType.Danger} title="成功提示的文案" description='123'></Alert>
         <Alert alertType={AlertType.Default} title="成功提示的文案" description='123' closable={false}></Alert>
-        <Alert alertType={AlertType.Success} title="成功提示的文案" description='123' closeText='点击打开'></Alert>
-        <Alert alertType={AlertType.Warning} title="成功提示的文案" description='123'></Alert>
+        <Alert alertType={AlertType.Success} title="成功提示的文案" description='123' close={() => {console.log(4343)}} closeText='点击打开'></Alert>
+        <Alert alertType={AlertType.Warning} title="成功提示的文案" description='123' close={()=> {console.log(123)}}></Alert>
       </header>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import classNames from 'classnames'
 
 export enum AlertType {
@@ -8,6 +8,10 @@ export enum AlertType {
   Warning = 'warning'
 }
 
+interface close {
+  (params?: any): void
+}
+
 interface BaseAlertProps {
   className?: string;
   alertType?: AlertType;
@@ -15,7 +19,7 @@ interface BaseAlertProps {
   description?: string;
   closable?: boolean;
   closeText?: string;
-  onClick?: Function;
+  close?: close;
   children?: React.ReactNode
 }
 
@@ -28,7 +32,7 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
     closeText,
     className,
     children,
-    onClick,
+    close,
     ...restProps
   } = props
 
@@ -36,17 +40,21 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
     [`alert-${alertType}`]: alertType,
   })
 
+  const domRef = useRef<HTMLDivElement>(null)
+
+  function closeDefault(params?: any) {
+    domRef.current!.style.display = 'none'
+  }
+
   return (
     <div
+      ref={domRef}
       className={classes}
       {...restProps}
     >
       <span className={`alert-title`}>{ title }</span>
       {description && <p className={`alert-description`}>{ description }</p>}
-      {closable && <i className={`alert-closeText`} onClick={() => {
-        console.log(123);
-        
-      }}>{ closeText }</i>}
+      {closable && <i className={`alert-closeText`} onClick={close || closeDefault}>{ closeText }</i>}
     </div>
   )
 }
@@ -54,7 +62,7 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
 Alert.defaultProps = {
   closable: true,
   closeText: '关闭',
-  alertType: AlertType.Default
+  alertType: AlertType.Default,
 }
 
 export default Alert
