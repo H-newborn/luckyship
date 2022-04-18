@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-15 17:04:29
  * @LastEditors: zch
- * @LastEditTime: 2022-04-18 13:37:48
+ * @LastEditTime: 2022-04-18 16:44:03
  */
 import React from 'react';
 import './styles/index.scss'
@@ -12,6 +12,7 @@ import Button from './components/Button/button'
 import Alert from './components/Alert/alert';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/MenuItem/menuItem';
+import SubMenu from './components/SubMenu/subMenu';
 
 const padding = {
   padding: '12px'
@@ -36,16 +37,24 @@ function App() {
           <Alert alertType='warning' title="警告提示的文案" description='自定义关闭defaultText按钮' close={()=> {alert('这是自定义打开的关闭按钮')}}></Alert>
         </div>
         <div style={ padding }>
-          <Menu defaultActive={0} onSelect={(index) => {alert(index)}}>
-            <MenuItem index={0} >123</MenuItem>
-            <MenuItem index={1} disabled>123</MenuItem>
-            <MenuItem index={2}>123</MenuItem>
+          <Menu defaultActive={'0'} onSelect={(index) => {alert(index)}}>
+            <MenuItem>123</MenuItem>
+            <MenuItem disabled>123</MenuItem>
+            <SubMenu title='dropdown'>
+              <MenuItem>123</MenuItem>
+              <MenuItem>123</MenuItem>
+              <MenuItem>123</MenuItem>
+            </SubMenu>
           </Menu>
 
-          <Menu mode='vertical' defaultActive={0} onSelect={(index) => {alert(index)}}>
-            <MenuItem index={0} >123</MenuItem>
-            <MenuItem index={1} disabled>123</MenuItem>
-            <MenuItem index={2}>123</MenuItem>
+          <Menu mode='vertical' defaultActive={'0'} onSelect={(index) => {alert(index)}}>
+            <MenuItem>123</MenuItem>
+            <MenuItem  disabled>123</MenuItem>
+            <SubMenu title='dropdown'>
+              <MenuItem>123</MenuItem>
+              <MenuItem>123</MenuItem>
+              <MenuItem>123</MenuItem>
+            </SubMenu>
           </Menu>
         </div>
       </header>

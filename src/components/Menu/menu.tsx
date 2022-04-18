@@ -4,36 +4,41 @@
  * @Author: zch
  * @Date: 2022-04-18 10:43:21
  * @LastEditors: zch
- * @LastEditTime: 2022-04-18 13:37:28
+ * @LastEditTime: 2022-04-18 18:04:30
  */
 import React, { createContext, useState } from "react";
 import classNames from "classnames";
+import { MenuItemProps } from "../MenuItem/menuItem";
 
-type MenuType = 'horizontal' | 'vertical'
+type MenuMode = 'horizontal' | 'vertical'
 
 interface SelectCallback {
-  (selectedIndex: number): void
+  (selectedIndex: string): void
 }
 
 interface BaseMenuProps {
   className?: string
-  mode?: MenuType
+  mode?: MenuMode
   children?: React.ReactNode
   // collapse?: boolean
-  defaultActive?: number
+  defaultActive?: string
   onSelect?: SelectCallback
+  defaultOpenSubMenus?: string[] 
 }
 
 interface ImenuContext {
-  index: number
+  index: string
   onSelect?: SelectCallback
+  mode?: MenuMode
+  defaultOpenSubMenus?: string[] 
 }
 
-export const MenuContext = createContext<ImenuContext>({index:0})
+export const MenuContext = createContext<ImenuContext>({index:'0'})
 
-type MenuProps = BaseMenuProps & React.MenuHTMLAttributes<HTMLElement>
+export type MenuProps = BaseMenuProps & React.MenuHTMLAttributes<HTMLElement>
+
 const Menu: React.FC<MenuProps> = (props) => {
-  const { mode, children, className, defaultActive, onSelect } = props
+  const { mode, children, className, defaultActive, onSelect, defaultOpenSubMenus } = props
 
   const [ currentActive, setActive ] = useState(defaultActive)
 
@@ -41,7 +46,7 @@ const Menu: React.FC<MenuProps> = (props) => {
     [`menu-${mode}`]: mode
   })
 
-  const handleClick = (index: number) => {
+  const handleClick = (index: string) => {
     setActive(index)
     if(onSelect) {
       onSelect(index)
@@ -49,14 +54,35 @@ const Menu: React.FC<MenuProps> = (props) => {
   }
 
   const passedContext: ImenuContext = {
-    index: currentActive ? currentActive : 0,
-    onSelect: handleClick
+    index: currentActive ? currentActive : '0',
+    onSelect: handleClick,
+    mode: mode,
+    defaultOpenSubMenus
   }
-  return <ul className={classes}>
+
+  const renderChildren = () => {
+    return React.Children.map(children, (child, index) => {
+      const childElement = child as React.FunctionComponentElement<MenuItemProps>
+      const { displayName } = childElement.type
+      if(displayName === 'MenuItem' || displayName === 'SubMenu') {
+        return React.cloneElement(childElement, { index: index.toString() })
+      } else {
+        console.error("Warning: Menu has a child which is not a MenuItem component")
+      }
+    })
+  }
+
+  return <ul className={classes} data-testid="test-menu">
     <MenuContext.Provider value={passedContext}>
-    { children}
+    { renderChildren() }
     </MenuContext.Provider>
   </ul>
+}
+
+Menu.defaultProps = {
+  defaultActive: '0',
+  mode: 'horizontal',
+  defaultOpenSubMenus: []
 }
 
 export default Menu
