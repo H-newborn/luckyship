@@ -43,6 +43,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^9.5.0",
+    "classnames": "^2.3.1",
     "jest-watch-typeahead": "^1.0.0",
     "jest-watcher": "^27.5.1"
   }

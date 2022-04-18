@@ -4,29 +4,35 @@
  * @Author: zch
  * @Date: 2022-04-15 17:04:29
  * @LastEditors: zch
- * @LastEditTime: 2022-04-15 17:08:16
+ * @LastEditTime: 2022-04-18 10:36:00
  */
 import React from 'react';
 import './styles/index.scss'
-import Button, { ButtonType, ButtonSize } from './components/Button/button'
-import Alert, { AlertType } from './components/Alert/alert';
+import Button from './components/Button/button'
+import Alert from './components/Alert/alert';
+
+const padding = {
+  padding: '12px'
+}
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>
+        <div style={ padding }>
           <Button onClick={e => {console.log(e)}}>Hello</Button>
-          <Button disabled size={ButtonSize.Large}>Hello</Button>
-          <Button btnType={ButtonType.Danger}>Hello</Button>
-          <Button btnType={ButtonType.Primary}>Hello</Button>
+          <Button disabled size='lg'>Hello</Button>
+          <Button btnType='danger'>Hello</Button>
+          <Button btnType='default'>Hello</Button>
           <Button>Hello</Button>
-          <Button btnType={ButtonType.Link} href='http://www.baidu.com' target='_blank' size={ButtonSize.Small}>hello</Button>
-          <Button btnType={ButtonType.Link} disabled>hello</Button>
+          <Button btnType='link' href='http://www.baidu.com' target='_blank' size='sm'>hello</Button>
+          <Button btnType='link' disabled>hello</Button>
         </div>
-        <Alert alertType={AlertType.Danger} title="成功提示的文案" description='123'></Alert>
-        <Alert alertType={AlertType.Default} title="成功提示的文案" description='123' closable={false}></Alert>
-        <Alert alertType={AlertType.Success} title="成功提示的文案" description='123' close={() => {console.log(4343)}} closeText='点击打开'></Alert>
-        <Alert alertType={AlertType.Warning} title="成功提示的文案" description='123' close={()=> {console.log(123)}}></Alert>
+        <div style={ padding }>
+          <Alert alertType='success' title="成功提示的文案" description='123'></Alert>
+          <Alert alertType='default' title="成功提示的文案" description='123' closable={false}></Alert>
+          <Alert alertType='danger' title="成功提示的文案" description='123' close={() => {alert(4343)}} closeText='点击打开'></Alert>
+          <Alert alertType='warning' title="成功提示的文案" description='123' close={()=> {alert(123)}}></Alert>
+        </div>
       </header>
     </div>
   );

@@ -1,16 +1,15 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: zch
+ * @Date: 2022-04-18 08:52:10
+ * @LastEditors: zch
+ * @LastEditTime: 2022-04-18 10:25:58
+ */
 import React, { useRef } from 'react'
 import classNames from 'classnames'
 
-export enum AlertType {
-  Success = 'success',
-  Default = 'default',
-  Danger = 'danger',
-  Warning = 'warning'
-}
-
-interface close {
-  (params?: any): void
-}
+type AlertType = 'success' | 'default' | 'danger' | 'warning'
 
 interface BaseAlertProps {
   className?: string;
@@ -19,7 +18,7 @@ interface BaseAlertProps {
   description?: string;
   closable?: boolean;
   closeText?: string;
-  close?: close;
+  close?: (...params: any) => void;
   children?: React.ReactNode
 }
 
@@ -42,8 +41,11 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
 
   const domRef = useRef<HTMLDivElement>(null)
 
-  function closeDefault(params?: any) {
-    domRef.current!.style.display = 'none'
+  function _closeDefault(params?: any) {
+    domRef.current!.style.opacity = '0'
+    domRef.current?.addEventListener('transitionend', () => {
+      domRef.current!.style.display = 'none'
+    })
   }
 
   return (
@@ -54,7 +56,7 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
     >
       <span className={`alert-title`}>{ title }</span>
       {description && <p className={`alert-description`}>{ description }</p>}
-      {closable && <i className={`alert-closeText`} onClick={close || closeDefault}>{ closeText }</i>}
+      {closable && <i className={`alert-closeText`} onClick={close || _closeDefault}>{ closeText }</i>}
     </div>
   )
 }
@@ -62,7 +64,7 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
 Alert.defaultProps = {
   closable: true,
   closeText: '关闭',
-  alertType: AlertType.Default,
+  alertType: 'default',
 }
 
 export default Alert

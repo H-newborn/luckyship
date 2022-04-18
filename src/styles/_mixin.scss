@@ -39,11 +39,11 @@
 @mixin alert-style(
   $title-color,
 ) {
-  background-color: lighten($title-color, 25%);
+  background-color: lighten($title-color, 35%);
   .alert-title {
     color: $title-color;
   }
   .alert-description {
-    color: lighten($title-color, 10%)
+    color: lighten($title-color, 5%)
   }
 }
