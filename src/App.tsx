@@ -13,6 +13,8 @@ import Alert from './components/Alert/alert';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/MenuItem/menuItem';
 import SubMenu from './components/SubMenu/subMenu';
+import Tabs from './components/Tabs/tabs';
+import TabItem from './components/Tabs/tab-item';
 
 const padding = {
   padding: '12px'
@@ -51,11 +53,18 @@ function App() {
             <MenuItem>123</MenuItem>
             <MenuItem  disabled>123</MenuItem>
             <SubMenu title='dropdown'>
-              <MenuItem>123</MenuItem>
+              <MenuItem >123</MenuItem>
               <MenuItem>123</MenuItem>
               <MenuItem>123</MenuItem>
             </SubMenu>
           </Menu>
+        </div>
+        <div style={ padding }>
+          <Tabs activeValue='f'>
+            <TabItem label='用户管理' name='f'>1</TabItem>
+            <TabItem label='配置管理' name='1'>1</TabItem>
+            <TabItem label='角色管理' disabled name='0'>1</TabItem>
+          </Tabs>
         </div>
       </header>
     </div>

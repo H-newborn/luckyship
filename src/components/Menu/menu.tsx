@@ -37,8 +37,7 @@ export const MenuContext = createContext<ImenuContext>({index:'0'})
 
 export type MenuProps = BaseMenuProps & React.MenuHTMLAttributes<HTMLElement>
 
-const Menu: React.FC<MenuProps> = (props) => {
-  const { mode, children, className, defaultActive, onSelect, defaultOpenSubMenus } = props
+const Menu: React.FC<MenuProps> = ({ mode, children, className, defaultActive, onSelect, defaultOpenSubMenus } ) => {
 
   const [ currentActive, setActive ] = useState(defaultActive)
 

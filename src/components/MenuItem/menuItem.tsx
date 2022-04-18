@@ -17,8 +17,7 @@ export interface MenuItemProps {
   disabled?: boolean
 }
 
-const MenuItem: React.FC<MenuItemProps> = (props) => {
-  const { index, children, className, disabled } = props
+const MenuItem: React.FC<MenuItemProps> = ({ index, children, className, disabled }) => {
 
   const context = useContext(MenuContext)
 
