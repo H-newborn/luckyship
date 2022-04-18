@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-18 08:52:10
  * @LastEditors: zch
- * @LastEditTime: 2022-04-18 10:25:58
+ * @LastEditTime: 2022-04-18 11:05:11
  */
 import React, { useRef } from 'react'
 import classNames from 'classnames'
@@ -22,7 +22,9 @@ interface BaseAlertProps {
   children?: React.ReactNode
 }
 
-const Alert: React.FC<BaseAlertProps> = (props) => {
+type AlertProps = BaseAlertProps & React.BaseHTMLAttributes<HTMLElement>
+
+const Alert: React.FC<AlertProps> = (props) => {
   const {
     alertType,
     title,
