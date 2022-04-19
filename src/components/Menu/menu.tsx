@@ -46,8 +46,6 @@ const Menu: React.FC<MenuProps> = ({ mode, children, className, defaultActive, o
   })
 
   const handleClick = (index: string) => {
-    console.log(index);
-    
     setActive(index)
     if(onSelect) {
       onSelect(index)

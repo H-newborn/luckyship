@@ -15,14 +15,19 @@ import MenuItem from './components/MenuItem/menuItem';
 import SubMenu from './components/SubMenu/subMenu';
 import Tabs from './components/Tabs/tabs';
 import TabItem from './components/Tabs/tab-item';
-
+import Icon from './components/Icon/icon'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+library.add(fas)
 const padding = {
   padding: '12px'
 }
 function App() {
   return (
     <div className="App">
+      {/* <FontAwesomeIcon icon={faCoffee} size='10x'></FontAwesomeIcon> */}
       <header className="App-header">
+        <Icon icon='coffee' theme='primary' size='10x'></Icon>
         <div style={ padding }>
           <Button onClick={e => {console.log(e)}}>Hello</Button>
           <Button disabled size='lg'>Hello</Button>
@@ -59,8 +64,8 @@ function App() {
             </SubMenu>
           </Menu>
         </div>
-        <div style={ padding }>
-          <Tabs>
+        <div style={ padding } >
+          <Tabs tabClick={(name) => {alert(name)}}>
             <TabItem label='用户管理'>yonghu</TabItem>
             <TabItem label='配置管理'>peizhi</TabItem>
             <TabItem label='角色管理' disabled>juese</TabItem>
