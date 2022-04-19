@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-15 17:04:29
  * @LastEditors: zch
- * @LastEditTime: 2022-04-18 16:44:03
+ * @LastEditTime: 2022-04-19 14:18:34
  */
 import React from 'react';
 import './styles/index.scss'
@@ -60,10 +60,11 @@ function App() {
           </Menu>
         </div>
         <div style={ padding }>
-          <Tabs activeValue='f'>
-            <TabItem label='用户管理' name='f'>1</TabItem>
-            <TabItem label='配置管理' name='1'>1</TabItem>
-            <TabItem label='角色管理' disabled name='0'>1</TabItem>
+          <Tabs>
+            <TabItem label='用户管理'>yonghu</TabItem>
+            <TabItem label='配置管理'>peizhi</TabItem>
+            <TabItem label='角色管理' disabled>juese</TabItem>
+            <TabItem label='角色管理'>111</TabItem>
           </Tabs>
         </div>
       </header>

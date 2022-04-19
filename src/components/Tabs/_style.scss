@@ -1,0 +1,33 @@
+.lucky-tabs {
+  position: relative;
+  width: 100%;
+  .tabs-header {
+    display: flex;
+    margin-bottom: 10px;
+    box-shadow: $menu-box-shadow;
+    border-bottom: $menu-border-width solid $menu-border-color;
+    .tabs-item {
+      padding: 8px 16px;
+      cursor: pointer;
+      &.is-disabled {
+        color: $menu-item-disabled-color;
+        pointer-events: none;
+        cursor: default;
+      }
+      &.is-active, &:hover {
+        color: $menu-item-active-color;
+        border-bottom: $menu-item-active-border-width solid $menu-item-active-color;
+      }
+    }
+  }
+  .tabs-content {
+    width: 100%;
+    padding: 8px 16px;
+    &-item {
+      display: none;
+    }
+    .is-active {
+      display: block;
+    }
+  }
+}

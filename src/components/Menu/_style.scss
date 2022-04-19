@@ -75,6 +75,7 @@
   }
   .lucky-submenu {
     position: absolute;
+    width: 100%;
     background: $white;
     z-index: 100;
     top: calc(100% + 8px);

@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: zch
+ * @Date: 2022-04-19 08:53:40
+ * @LastEditors: zch
+ * @LastEditTime: 2022-04-19 14:24:15
+ */
 import React, { createContext, useState } from "react";
 import classNames from "classnames";
 import { TabItemProps } from "./tab-item";
@@ -16,53 +24,79 @@ interface TabsProps {
 }
 
 interface ITabsContext {
-  value: string
+  name: string
   tabClick?: TabClick
 }
 
-export const TabsContext = createContext<ITabsContext>({value: '0'})
-
-
-
+export const TabsContext = createContext<ITabsContext>({name: '0'})
 
 const Tabs: React.FC<TabsProps> = ({ activeValue, closable, tabClick, className, style, children }) => {
   const [currentActive, setActive] = useState(activeValue)
 
-  const handleClick = (value?: string) => {
-    setActive(value)
+  const handleClick = (name?: string) => {
+    setActive(name)
     if(tabClick) {
-      tabClick(value)
+      tabClick(name)
     }
   }
   const passedContext: ITabsContext = {
-    value: currentActive ? currentActive : '0',
+    name: currentActive ? currentActive : '1',
     tabClick: handleClick
   }
 
-  const classes = classNames('lucky-tabs', className, {
-  })
-
-  const renderChildren = () => {
+  const renderTabItemChildren = () => {
     return React.Children.map(children, (child, index) => {
       const childElement = child as React.FunctionComponentElement<TabItemProps>
       const { displayName } = childElement.type
       if (displayName === 'TabItem') {
-        return React.cloneElement(childElement)
+        if(childElement.props.name) {
+          return React.cloneElement(childElement)
+        }
+        const name = index + 1
+        return React.cloneElement(childElement, { name: name.toString()})
       } else {
         console.error("Warning: Tabs has a child which is not a TabItem component")
       }
     })
   }
 
-  return <ul style={style} className={classes}>
+  const renderTabContentChildren = () => {
+    return React.Children.map(children, (child, index) => {
+      const childElement = child as React.FunctionComponentElement<TabItemProps>
+      const { displayName } = childElement.type
+      
+      const name = childElement.props.name || (index + 1).toString()
+      const TabContentClasses = classNames('tabs-content-item', {
+        'is-active': name === currentActive
+      })
+
+      if (displayName === 'TabItem') {
+        if(childElement.props.children) {
+          return React.cloneElement(<div></div>,{ className: TabContentClasses},childElement.props.children)
+        }
+      } else {
+        console.error("Warning: Tabs has a child which is not a TabItem component")
+      }
+    })
+  }
+
+  const classes = classNames('lucky-tabs', className, {
+  })
+
+  return <div style={style} className={classes}>
     <TabsContext.Provider value={passedContext}>
-      { renderChildren() }
+      <div className="tabs-header">
+        { renderTabItemChildren() }
+      </div>
+      <div className="tabs-content">
+        {renderTabContentChildren()}
+      </div>
     </TabsContext.Provider>
-  </ul>
+  </div>
 }
 
 Tabs.defaultProps = {
-  activeValue: '0',
+  activeValue: '1',
   closable: false,
 }
 

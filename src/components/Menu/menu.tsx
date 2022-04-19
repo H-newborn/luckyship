@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-18 10:43:21
  * @LastEditors: zch
- * @LastEditTime: 2022-04-18 18:04:30
+ * @LastEditTime: 2022-04-19 14:25:00
  */
 import React, { createContext, useState } from "react";
 import classNames from "classnames";
@@ -46,6 +46,8 @@ const Menu: React.FC<MenuProps> = ({ mode, children, className, defaultActive, o
   })
 
   const handleClick = (index: string) => {
+    console.log(index);
+    
     setActive(index)
     if(onSelect) {
       onSelect(index)

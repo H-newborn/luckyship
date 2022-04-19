@@ -1,3 +1,11 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: zch
+ * @Date: 2022-04-19 08:53:40
+ * @LastEditors: zch
+ * @LastEditTime: 2022-04-19 13:48:45
+ */
 import React, { useContext } from "react";
 import classNames from "classnames";
 import { TabsContext } from "./tabs";
@@ -20,21 +28,15 @@ const TabItem: React.FC<TabItemProps> = ({ label, disabled, name, children, clas
       context.tabClick(name)
     }
   }
-  const tabClasses = classNames('tab-item', className, {
+  const tabClasses = classNames('tabs-item', className, {
     'is-disabled': disabled,
-    'is-active': context.value === name
+    'is-active': context.name === name
   })
 
-  const contentClasses = classNames('tab-content', className, {
-    'is-active': context.value === name
-  })
   return (
-    <>
-      <li style={style} className={tabClasses} onClick={handleClick}>
-        {label}
-      </li>
-      <div className={contentClasses}>{ children }</div>
-    </>
+    <div style={style} className={tabClasses} onClick={handleClick}>
+      {label}
+    </div>
   )
 }
 
