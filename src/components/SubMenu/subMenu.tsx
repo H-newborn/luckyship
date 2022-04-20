@@ -4,13 +4,15 @@
  * @Author: zch
  * @Date: 2022-04-18 15:40:22
  * @LastEditors: zch
- * @LastEditTime: 2022-04-18 18:07:29
+ * @LastEditTime: 2022-04-20 10:48:00
  */
 import React, { FunctionComponentElement, useContext, useState } from "react";
 import classNames from "classnames";
 import { MenuContext } from "../Menu/menu";
 import { MenuItemProps } from "../MenuItem/menuItem";
 import Icon from "../Icon/icon";
+// import { CSSTransition } from "react-transition-group";
+import Transition from "../Transition/transition";
 
 export interface SubMenuProps {
   index?: string
@@ -68,10 +70,20 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
         console.error("SubMenu has a child which is not a MenuItem component")
       }
     })
+    // return (
+    //   <CSSTransition in={menuOpen} timeout={300} classNames='zoom-in-top' appear unmountOnExit>
+    //     <ul className={subMenuClasses}>
+    //       {childrenComponent}
+    //     </ul>
+    //   </CSSTransition>
+    // )
+
     return (
-      <ul className={subMenuClasses}>
-        {childrenComponent}
-      </ul>
+      <Transition in={menuOpen} timeout={300} animation='zoom-in-top' >
+         <ul className={subMenuClasses}>
+           {childrenComponent}
+         </ul>
+      </Transition>
     )
   }
   return(

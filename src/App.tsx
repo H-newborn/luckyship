@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-15 17:04:29
  * @LastEditors: zch
- * @LastEditTime: 2022-04-19 14:18:34
+ * @LastEditTime: 2022-04-20 11:00:23
  */
 import React from 'react';
 import './styles/index.scss'
@@ -65,11 +65,11 @@ function App() {
           </Menu>
         </div>
         <div style={ padding } >
-          <Tabs tabClick={(name) => {alert(name)}}>
+          <Tabs tabClick={(name) => {console.log(name)}}>
             <TabItem label='用户管理'>yonghu</TabItem>
             <TabItem label='配置管理'>peizhi</TabItem>
             <TabItem label='角色管理' disabled>juese</TabItem>
-            <TabItem label='角色管理'>111</TabItem>
+            <TabItem label='角色管理'><Button btnType='danger'>Hello</Button></TabItem>
           </Tabs>
         </div>
       </header>
