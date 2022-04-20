@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-20 13:32:38
  * @LastEditors: zch
- * @LastEditTime: 2022-04-20 16:05:12
+ * @LastEditTime: 2022-04-20 17:03:30
  */
 import React from 'react';
 
@@ -32,10 +32,10 @@ export default {
   decorators: [CenterDecorator,withInfo],
   parameters: {
     info: {
-      text: `this is a nice component
-      ~~~js
-      <Button>Click Here</Button>
-      ~~~
+      text: `this is nice component  
+
+      const a = 'hello'
+      this is markdown
       `,
       inline: true
     }
