@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-15 17:04:29
  * @LastEditors: zch
- * @LastEditTime: 2022-04-20 11:00:23
+ * @LastEditTime: 2022-04-20 13:07:35
  */
 import React from 'react';
 import './styles/index.scss'
@@ -18,6 +18,7 @@ import TabItem from './components/Tabs/tab-item';
 import Icon from './components/Icon/icon'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+
 library.add(fas)
 const padding = {
   padding: '12px'
