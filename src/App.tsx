@@ -19,6 +19,8 @@ import Icon from './components/Icon/icon'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
+import Input from './components/Input/input'
+
 library.add(fas)
 const padding = {
   padding: '12px'
@@ -28,6 +30,7 @@ function App() {
     <div className="App">
       {/* <FontAwesomeIcon icon={faCoffee} size='10x'></FontAwesomeIcon> */}
       <header className="App-header">
+        <Input disabled size='lg' prepand={<Button>button</Button>} append="234"></Input>
         <Icon icon='coffee' theme='primary' size='10x'></Icon>
         <div style={ padding }>
           <Button onClick={e => {console.log(e)}}>Hello</Button>
