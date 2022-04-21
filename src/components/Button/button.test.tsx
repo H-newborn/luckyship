@@ -4,11 +4,11 @@
  * @Author: zch
  * @Date: 2022-04-18 08:52:10
  * @LastEditors: zch
- * @LastEditTime: 2022-04-18 14:11:30
+ * @LastEditTime: 2022-04-21 17:10:46
  */
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import Button from "./button";
+import {Button} from "./button";
 
 const defaultProps = {
   onClick: jest.fn()

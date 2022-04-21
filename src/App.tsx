@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-15 17:04:29
  * @LastEditors: zch
- * @LastEditTime: 2022-04-20 13:07:35
+ * @LastEditTime: 2022-04-21 18:03:43
  */
 import React from 'react';
 import './styles/index.scss'
@@ -35,7 +35,7 @@ function App() {
           <Button btnType='danger'>Hello</Button>
           <Button btnType='default'>Hello</Button>
           <Button>Hello</Button>
-          <Button btnType='link' href='http://www.baidu.com' target='_blank' size='sm'>hello</Button>
+          <Button onClick={() =>{console.log(123)}} btnType='link' href='http://www.baidu.com' target='_blank' size='sm'>hello</Button>
           <Button btnType='link' disabled>hello</Button>
         </div>
         <div style={ padding }>

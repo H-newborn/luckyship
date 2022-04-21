@@ -14,7 +14,7 @@ type AlertType = 'success' | 'default' | 'danger' | 'warning'
 interface BaseAlertProps {
   className?: string;
   alertType?: AlertType;
-  title?: string;
+  title: string;
   description?: string;
   closable?: boolean;
   closeText?: string;
@@ -24,7 +24,7 @@ interface BaseAlertProps {
 
 type AlertProps = BaseAlertProps & React.BaseHTMLAttributes<HTMLElement>
 
-const Alert: React.FC<AlertProps> = (props) => {
+export const Alert: React.FC<AlertProps> = (props) => {
   const {
     alertType,
     title,
