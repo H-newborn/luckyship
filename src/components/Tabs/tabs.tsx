@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-19 08:53:40
  * @LastEditors: zch
- * @LastEditTime: 2022-04-19 14:24:15
+ * @LastEditTime: 2022-04-22 10:04:20
  */
 import React, { createContext, useState } from "react";
 import classNames from "classnames";
@@ -30,7 +30,7 @@ interface ITabsContext {
 
 export const TabsContext = createContext<ITabsContext>({name: '0'})
 
-const Tabs: React.FC<TabsProps> = ({ activeValue, closable, tabClick, className, style, children }) => {
+export const Tabs: React.FC<TabsProps> = ({ activeValue, closable, tabClick, className, style, children }) => {
   const [currentActive, setActive] = useState(activeValue)
 
   const handleClick = (name?: string) => {

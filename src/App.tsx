@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-15 17:04:29
  * @LastEditors: zch
- * @LastEditTime: 2022-04-21 18:03:43
+ * @LastEditTime: 2022-04-22 17:38:55
  */
 import React from 'react';
 import './styles/index.scss'
@@ -20,17 +20,81 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import Input from './components/Input/input'
+import AutoComplete, { DataSourceType } from './components/Input/autoComplate'
 
 library.add(fas)
 const padding = {
   padding: '12px'
+}
+const arr111: Array<string> = ['111','222','abs','abc','aww','bg']
+
+const handleFetch1 = (query: string) => {
+  return arr111.filter(name => name.includes(query))
+}
+
+interface arrProps {
+  value: string
+  number?: number
+}
+const arr = [
+  {value: '111', number: 12}
+]
+
+interface GithubUserProps {
+  login: string
+  url: string
+  avatar_url: string
+}
+
+const handleFetch = (query: string) => {
+  return arr.filter(name => name.value.includes(query)).map(name => ({
+    value: name.value,
+    number: name.number
+  }))
+}
+
+const handleFetch2 = (query: string) => {
+  return fetch(`https://api.github.com/search/users?q=${query}`).then(res => res.json()).then(({items}) => {
+    console.log(items);
+    return items.slice(0,10).map((item) => ({
+      value: item.login,
+      ...item
+    }))
+  })
+}
+
+const renderOption1 = (item: string) => {
+  return (
+    <h2>NAme: {item}</h2>
+  )
+}
+
+const renderOption = (item: DataSourceType<arrProps>) => {
+  return (
+    <>
+    <h2>NAme: {item.value}</h2>
+    <p>number: {item.number}</p>
+    </>
+  )
+}
+
+const renderOption2 = (item: DataSourceType<GithubUserProps>) => {
+  return (
+    <>
+    <h2>NAme: {item.login}</h2>
+    <p>number: {item.url}</p>
+    </>
+  )
 }
 function App() {
   return (
     <div className="App">
       {/* <FontAwesomeIcon icon={faCoffee} size='10x'></FontAwesomeIcon> */}
       <header className="App-header">
-        <Input disabled size='lg' prepand={<Button>button</Button>} append="234"></Input>
+      <Input disabled size='lg' prepend={<Button>button</Button>} append="234"></Input>
+      <Input size='lg' prepend={<Button>button</Button>} append="234"></Input>
+      <AutoComplete fetchSuggestions={handleFetch2} onSelect={() => {console.log('select');
+      }} renderOption={renderOption}></AutoComplete>
         <Icon icon='coffee' theme='primary' size='10x'></Icon>
         <div style={ padding }>
           <Button onClick={e => {console.log(e)}}>Hello</Button>

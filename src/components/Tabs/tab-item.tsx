@@ -4,7 +4,7 @@
  * @Author: zch
  * @Date: 2022-04-19 08:53:40
  * @LastEditors: zch
- * @LastEditTime: 2022-04-19 13:48:45
+ * @LastEditTime: 2022-04-22 10:04:31
  */
 import React, { useContext } from "react";
 import classNames from "classnames";
@@ -19,7 +19,7 @@ export interface TabItemProps {
   style?: React.CSSProperties
 }
 
-const TabItem: React.FC<TabItemProps> = ({ label, disabled, name, children, className, style }) => {
+export const TabItem: React.FC<TabItemProps> = ({ label, disabled, name, children, className, style }) => {
 
   const context = useContext(TabsContext)
 
