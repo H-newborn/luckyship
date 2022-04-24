@@ -12,7 +12,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 // import { action } from '@storybook/addon-actions'
 // import { withInfo } from '@storybook/addon-info';
 
-import AutoComplate from './autoComplate';
+import autoComplete from './autoComplete';
 
 const styles: React.CSSProperties = {
   textAlign: 'center'
@@ -26,13 +26,13 @@ const divStyle: React.CSSProperties = {
 const CenterDecorator = (storyFn: any) => <div style={styles}>{storyFn()}</div>
 
 export default {
-  title: 'AutoComplate',
-  component: AutoComplate,
+  title: 'autoComplete',
+  component: autoComplete,
   args: {
   },
   decorators: [CenterDecorator],
-} as ComponentMeta<typeof AutoComplate>;
+} as ComponentMeta<typeof autoComplete>;
 
 //👇 We create a “template” of how args map to rendering
-const Template: ComponentStory<typeof AutoComplate> = (args) => <AutoComplate {...args} />;
+// const Template: ComponentStory<typeof autoComplete> = (args) => <autoComplete {...args} />;
 

@@ -20,8 +20,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import Input from './components/Input/input'
-import AutoComplete, { DataSourceType } from './components/Input/autoComplate'
+import AutoComplete, { DataSourceType } from './components/AutoComplete/autoComplete'
 
+import Content from './content'
 library.add(fas)
 const padding = {
   padding: '12px'
@@ -54,8 +55,11 @@ const handleFetch = (query: string) => {
 }
 
 const handleFetch2 = (query: string) => {
-  return fetch(`https://api.github.com/search/users?q=${query}`).then(res => res.json()).then(({items}) => {
-    console.log(items);
+  return fetch(`https://api.github.com/search/users?q=${query}`)
+    .then(res => res.json())
+    .then(({ items }) => {
+      console.log(items);
+      // @ts-ignore # 忽视本行代码的小错误
     return items.slice(0,10).map((item) => ({
       value: item.login,
       ...item
@@ -89,11 +93,12 @@ const renderOption2 = (item: DataSourceType<GithubUserProps>) => {
 function App() {
   return (
     <div className="App">
+      <Content></Content>
       {/* <FontAwesomeIcon icon={faCoffee} size='10x'></FontAwesomeIcon> */}
       <header className="App-header">
       <Input disabled size='lg' prepend={<Button>button</Button>} append="234"></Input>
       <Input size='lg' prepend={<Button>button</Button>} append="234"></Input>
-      <AutoComplete fetchSuggestions={handleFetch2} onSelect={() => {console.log('select');
+      <AutoComplete placeholder='请输入' fetchSuggestions={handleFetch2} onSelect={() => {console.log('select');
       }} renderOption={renderOption}></AutoComplete>
         <Icon icon='coffee' theme='primary' size='10x'></Icon>
         <div style={ padding }>
